@@ -182,6 +182,9 @@
           padding: 10px;
           height: 100vh;
           overflow: auto;
+          display: flex;
+          flex-direction: column;
+          justify-content: space-between;
         }
         h1 {
           font-size: 2em;
@@ -190,9 +193,11 @@
           font-size: 1.5em;
         }
         .flashcard-container {
-          width: 100%;
-          height: 50vh;
-          max-height: 400px;
+          width: 90vw;
+          height: 90vh;
+          max-width: 400px;
+          max-height: 600px;
+          margin: 10px auto;
         }
         .front,
         .back {
