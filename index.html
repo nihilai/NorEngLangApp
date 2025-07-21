@@ -178,41 +178,39 @@
       @media (max-width: 480px) {
         body {
           background-size: 300% auto;
+          padding: 10px;
         }
         h1 {
-          font-size: 2em;
+          font-size: 1.8em;
+          margin-bottom: 10px;
         }
         .info {
           font-size: 1.5em;
+          margin-bottom: 15px;
         }
         .flashcard-container {
-          width: 90vw;
-          height: 180vh;
-          max-width: 400px;
-          max-height: 800px;
-          margin: 10px auto;
+          width: 90%;
+          height: 90%;
         }
         .front,
         .back {
           font-size: 1.5em;
         }
-        button,
-        input {
-          padding: 6px 12px;
+        .input-button {
+          flex-direction: column;
+          align-items: center;
+          width: 100%;
+        }
+        input,
+        button {
+          width: 90%;
+          margin: 5px 0;
+          padding: 10px;
           font-size: 1.5em;
         }
         #score {
           font-size: 1.5em;
-        }
-        .input-button {
-          display: flex;
-          flex-direction: column;
-          align-items: center;
-        }
-        input,
-        button {
-          width: 100%;
-          margin: 5px 0;
+          margin-top: 15px;
         }
       }
     </style>
