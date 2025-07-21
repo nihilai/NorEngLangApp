@@ -2,7 +2,12 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Norwegian to English Flashcards</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Serif:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
     <style>
       body {
         display: flex;
@@ -135,6 +140,30 @@
       }
       #alt {
         display: none;
+      }
+      @media (max-width: 480px) {
+        .info {
+          font-size: 1.5em;
+        }
+        .flashcard-container {
+          width: 546px;
+          height: 800px;
+        }
+        .front,
+        .back {
+          font-size: 1.5em;
+        }
+        button,
+        input {
+          padding: 6px 12px;
+          font-size: 1.5em;
+        }
+        #score {
+          font-size: 1.5em;
+        }
+        input,
+        button {
+        }
       }
     </style>
   </head>
