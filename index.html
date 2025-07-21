@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Norwegian to English Flashcards</title>
+    <style>
+      body {
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        height: 100vh;
+        margin: 0;
+        font-family: "Noto Serif", sans-serif;
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        transition: background-image 1s ease-in-out;
+        text-align: center;
+        color: white;
+      }
+      h1 {
+        font-family: "Noto Serif", sans-serif;
+        font-size: 4em;
+        text-shadow: -1.5px -1.5px 0 black, 1.5px -1.5px 0 black,
+          -1.5px 1.5px 0 black, 1.5px 1.5px 0 black,
+          2px 2px 5px rgba(0, 0, 0, 0.5);
+        margin: 3px;
+      }
+      .info {
+        font-family: "Noto Serif", sans-serif;
+        font-size: 1.2em;
+        text-shadow: -1px -1px 0 black, 1px -1px 0 black, -1px 1px 0 black,
+          1px 1px 0 black, 2px 2px 5px rgba(0, 0, 0, 0.5);
+        margin: 3px;
+      }
+      .flashcard-container {
+        perspective: 1000px;
+        width: 273px;
+        height: 400px;
+        margin: 20px auto;
+      }
+      .flashcard {
+        width: 100%;
+        height: 100%;
+        position: relative;
+        transform-style: preserve-3d;
+        transition: transform 0.6s;
+        cursor: pointer;
+      }
+      .flashcard.flipped {
+        transform: rotateY(180deg);
+      }
+      .front,
+      .back {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        backface-visibility: hidden;
+        border: 10px solid white;
+        border-radius: 45px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 2em;
+        color: white;
+        text-shadow: -1.5px -1.5px 0 black, 1.5px -1.5px 0 black,
+          -1.5px 1.5px 0 black, 1.5px 1.5px 0 black;
+      }
+      .front {
+        background-image: url(pics/card.webp);
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+      }
+      .back {
+        background-color: white;
+        /* box-shadow: inset 0 0 0 8px #c83737, 2px 2px 5px rgba(0, 0, 0, 0.5);*/
+        transform: rotateY(180deg);
+      }
+      button,
+      input {
+        display: inline-block;
+        position: relative;
+        top: 25%;
+        font-family: "Noto Serif", sans-serif;
+        border: 1.5px solid black;
+        border-radius: 5px;
+        padding: 10px 20px;
+        box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+      }
+      input {
+        position: relative;
+        right: 3%;
+        color: black;
+        font-size: 1.2em;
+        background-color: white;
+      }
+      button {
+        position: relative;
+        left: 3%;
+        color: white;
+        font-size: 1.2em;
+        background-color: #c83737;
+        text-shadow: -0.5px -0.5px 0 black, 0.5px -0.5px 0 black,
+          -0.5px 0.5px 0 black, 0.5px 0.5px 0 black;
+        transition: transform 0.2s ease;
+        transition: box-shadow 0.2s ease;
+        transition: background-color 0.2s ease;
+      }
+      button:active {
+        transform: translateY(2px);
+        box-shadow: none;
+      }
+      button:hover {
+        background-color: #f8d52a;
+      }
+      .alternatives {
+        position: absolute;
+        top: 30%;
+        left: 10%;
+        width: 80%;
+        display: none;
+        justify-content: space-around;
+      }
+      #score {
+        position: relative;
+        font-size: 1.5em;
+        text-shadow: -1px -1px 0 black, 1px -1px 0 black, -1px 1px 0 black,
+          1px 1px 0 black, 2px 2px 5px rgba(0, 0, 0, 0.5);
+      }
+      #alt {
+        display: none;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Overskrift -->
+    <h1>Juicy Lucy's language bootycamp</h1>
+    <p class="info">
+      Type in the English word for the Norwegian word, and click "Svar" to check
+      your answer.
+    </p>
+
+    <!-- Flashcard -->
+    <div class="flashcard-container" onclick="flipCard()">
+      <div class="flashcard" id="flashcard">
+        <div class="front" id="cardFront"></div>
+        <div class="back" id="cardBack"></div>
+      </div>
+    </div>
+
+    <!-- Input-button -->
+    <div class="input-button">
+      <input id="answer" type="text" />
+      <button id="submit">Svar</button>
+    </div>
+    <div id="alt">
+      <button class="altbuttons"></button>
+      <button class="altbuttons"></button>
+      <button class="altbuttons"></button>
+      <button class="altbuttons"></button>
+    </div>
+
+    <p id="score"></p>
+
+    <script>
+      let flashCards = [];
+      let currentCard = 0;
+      let showingFront = true;
+      let score = 0;
+      let wasFlipped = false;
+
+      function startFlashcards() {
+        currentCard = Math.floor(Math.random() * flashCards.length);
+        total = 0;
+        updateCard(
+          flashCards[currentCard].norwegian,
+          flashCards[currentCard].english
+        );
+        updateScore();
+      }
+
+      function nextCard() {
+        total++;
+        const userAnswer = document
+          .getElementById("answer")
+          .value.trim()
+          .toLowerCase();
+        const correctAnswer = flashCards[currentCard].english.toLowerCase();
+
+        if (wasFlipped) {
+          showingFront = true;
+          wasFlipped = false;
+          document.getElementById("flashcard").classList.remove("flipped");
+          setTimeout(() => {
+            alert("I saw that! You flipped the card! No points for you :P");
+            currentCard = Math.floor(Math.random() * flashCards.length);
+            updateCard(
+              flashCards[currentCard].norwegian,
+              flashCards[currentCard].english
+            );
+          }, 10);
+        } else if (userAnswer === correctAnswer) {
+          score++;
+          currentCard = Math.floor(Math.random() * flashCards.length);
+          updateCard(
+            flashCards[currentCard].norwegian,
+            flashCards[currentCard].english
+          );
+          const cards = document.querySelectorAll(".front, .back");
+          const yellowBorder = "#f8d52a";
+          cards.forEach((card) => {
+            card.style.border = `10px solid ${yellowBorder}`;
+          });
+
+          setTimeout(() => {
+            cards.forEach((card) => {
+              card.style.border = `10px solid white`;
+            });
+          }, 1000);
+          if (score % 5 === 0 && score > 0) {
+            document.getElementById("answer").style.display = "none";
+            document.getElementById("submit").style.display = "none";
+            document.getElementById("alt").style.display = "inline-block";
+
+            const altButtons = document.querySelectorAll(".altbuttons");
+            const correct = flashCards[currentCard].english.toLowerCase();
+            const alternatives = flashCards
+              .filter((card) => card.english.toLowerCase() !== correct)
+              .sort(() => 0.5 - Math.random())
+              .slice(0, 3)
+              .map((card) => card.english);
+            const options = [...alternatives, correct].sort(
+              () => 0.5 - Math.random()
+            );
+
+            altButtons.forEach((button, index) => {
+              button.textContent = options[index];
+              button.onclick = () => {
+                if (button.textContent === correct) {
+                  total++;
+                  score++;
+                  currentCard = Math.floor(Math.random() * flashCards.length);
+                  updateCard(
+                    flashCards[currentCard].norwegian,
+                    flashCards[currentCard].english
+                  );
+                  const cards = document.querySelectorAll(".front, .back");
+                  const yellowBorder = "#f8d52a";
+                  cards.forEach((card) => {
+                    card.style.border = `10px solid ${yellowBorder}`;
+                  });
+
+                  setTimeout(() => {
+                    cards.forEach((card) => {
+                      card.style.border = `10px solid white`;
+                    });
+                  }, 1000);
+                } else if (button.textContent !== correct) {
+                  total++;
+                  flipCard2();
+                  const cards = document.querySelectorAll(".front, .back");
+                  const redBorder = "#c83737";
+                  cards.forEach((card) => {
+                    card.style.border = `10px solid ${redBorder}`;
+                  });
+
+                  setTimeout(() => {
+                    flipCard2();
+                  }, 2000);
+
+                  setTimeout(() => {
+                    cards.forEach((card) => {
+                      card.style.border = `10px solid white`;
+                    });
+                    currentCard = Math.floor(Math.random() * flashCards.length);
+                    updateCard(
+                      flashCards[currentCard].norwegian,
+                      flashCards[currentCard].english
+                    );
+                  }, 2500);
+                }
+                updateScore();
+                document.getElementById("answer").style.display =
+                  "inline-block";
+                document.getElementById("submit").style.display =
+                  "inline-block";
+                document.getElementById("alt").style.display = "none";
+              };
+            });
+          }
+        } else {
+          flipCard2();
+          const cards = document.querySelectorAll(".front, .back");
+          const redBorder = "#c83737";
+          cards.forEach((card) => {
+            card.style.border = `10px solid ${redBorder}`;
+          });
+
+          setTimeout(() => {
+            flipCard2();
+          }, 2000);
+
+          setTimeout(() => {
+            cards.forEach((card) => {
+              card.style.border = `10px solid white`;
+            });
+            currentCard = Math.floor(Math.random() * flashCards.length);
+            updateCard(
+              flashCards[currentCard].norwegian,
+              flashCards[currentCard].english
+            );
+          }, 2500);
+        }
+        document.getElementById("answer").value = "";
+        updateScore();
+      }
+
+      document.getElementById("submit").addEventListener("click", nextCard);
+      document.addEventListener("keydown", (event) => {
+        if (event.key === "Enter") {
+          nextCard();
+        }
+      });
+
+      function updateScore() {
+        document.getElementById(
+          "score"
+        ).textContent = `Score: ${score} / ${total}`;
+      }
+
+      function flipCard() {
+        document.getElementById("flashcard").classList.toggle("flipped");
+        showingFront = !showingFront;
+        wasFlipped = true;
+      }
+
+      function flipCard2() {
+        document.getElementById("flashcard").classList.toggle("flipped");
+        showingFront = !showingFront;
+      }
+
+      function updateCard(nor, eng) {
+        document.getElementById("cardFront").textContent = nor;
+        document.getElementById("cardBack").textContent = eng;
+      }
+
+      // JSON fetching
+      fetch("words.json")
+        .then((response) => response.json())
+        .then((data) => {
+          flashCards = data;
+          startFlashcards();
+        })
+        .catch((error) => console.error("Error loading JSON:", error));
+
+      // Bakgrunnsbilder
+
+      const imageUrl = [
+        "pics/3h.jpg",
+        "pics/4h.jpg",
+        "pics/5h.jpg",
+        "pics/6h.jpg",
+        "pics/8h.jpg",
+        "pics/10h.jpg",
+        "pics/11h.jpg",
+        "pics/12h.jpg",
+      ];
+
+      let background = imageUrl.map((url) => `url('${url}')`);
+      let index = 0;
+
+      imageUrl.forEach((src) => {
+        const img = new Image();
+        img.src = src;
+      });
+
+      function changeBackground() {
+        document.body.style.backgroundImage = background[index];
+        index = (index + 1) % background.length;
+      }
+
+      changeBackground();
+      setInterval(changeBackground, 180000);
+    </script>
+  </body>
+</html>
