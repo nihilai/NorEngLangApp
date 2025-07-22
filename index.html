@@ -142,8 +142,12 @@
         display: none;
       }
       @media (max-width: 600px) {
+        * {
+          height: 100dvh;
+          width: 100dvw;
+        }
         body {
-          background-size: auto 100dvh;
+          background-size: auto 100vh;
         }
         h1 {
           font-size: 2em;
