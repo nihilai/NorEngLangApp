@@ -748,7 +748,7 @@
     "english": "last"
   },
   {
-    "norwegian": "la",
+    "norwegian": "(å) la",
     "english": "let"
   },
   {
@@ -817,7 +817,7 @@
   },
   {
     "norwegian": "bære",
-    "english": "bear"
+    "english": "carry"
   },
   {
     "norwegian": "tok",
@@ -1488,7 +1488,7 @@
     "english": "pattern"
   },
   {
-    "norwegian": "langsom",
+    "norwegian": "treg",
     "english": "slow"
   },
   {
@@ -1613,7 +1613,7 @@
   },
   {
     "norwegian": "generell",
-    "english": "generally"
+    "english": "general"
   },
   {
     "norwegian": "sirkel",
@@ -2548,7 +2548,7 @@
     "english": "master"
   },
   {
-    "norwegian": "sport",
+    "norwegian": "sport/idrett",
     "english": "sport"
   },
   {
