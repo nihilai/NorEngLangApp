@@ -143,7 +143,7 @@
       }
       @media (max-width: 640px) {
         body {
-          background-size: 100% auto;
+          background-size: auto 100%;
         }
         h1 {
           font-size: 2em;
@@ -152,7 +152,7 @@
           font-size: 1em;
         }
         .flashcard-container {
-          max-width: 50vw;
+          max-width: 60vw;
           max-height: 60vh;
         }
         .front,
@@ -289,9 +289,7 @@
                     card.style.border = `10px solid ${redBorder}`;
                   });
 
-                  setTimeout(() => {
-                    flipCard();
-                  }, 2000);
+                  (setTimeout) => flipCard(), 2000;
 
                   setTimeout(() => {
                     cards.forEach((card) => {
@@ -321,9 +319,7 @@
             card.style.border = `10px solid ${redBorder}`;
           });
 
-          setTimeout(() => {
-            flipCard();
-          }, 2000);
+          (setTimeout) => flipCard(), 2000;
 
           setTimeout(() => {
             cards.forEach((card) => {
@@ -340,11 +336,11 @@
         updateScore();
       }
 
-      document.getElementById("submit").addEventListener("click", nextCard);
+      document
+        .getElementById("submit")
+        .addEventListener("click", (setTimeout) => nextCard(), 500);
       document.addEventListener("keydown", (event) => {
-        if (event.key === "Enter") {
-          nextCard();
-        }
+        if (event.key === "Enter") (setTimeout) => nextCard, 500;
       });
 
       function updateScore() {
