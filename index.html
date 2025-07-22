@@ -223,7 +223,10 @@
           .toLowerCase();
         const correctAnswer = flashCards[currentCard].english.toLowerCase();
 
-        if (userAnswer === correctAnswer) {
+        if (userAnswer === "") {
+          alert("Please type in the English word.");
+          return;
+        } else if (userAnswer === correctAnswer) {
           score++;
           currentCard = Math.floor(Math.random() * flashCards.length);
           updateCard(
