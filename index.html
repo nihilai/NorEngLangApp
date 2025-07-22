@@ -265,7 +265,9 @@
               button.textContent = options[index];
               button.onclick = () => {
                 if (button.textContent === correct) {
+                  total++;
                   score++;
+                  updateScore();
                   currentCard = Math.floor(Math.random() * flashCards.length);
                   updateCard(
                     flashCards[currentCard].norwegian,
@@ -284,6 +286,7 @@
                   }, 1000);
                 } else if (button.textContent !== correct) {
                   total++;
+                  updateScore();
                   flipCard();
                   const cards = document.querySelectorAll(".front, .back");
                   const redBorder = "#c83737";
