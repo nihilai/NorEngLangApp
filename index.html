@@ -152,8 +152,8 @@
           font-size: 1em;
         }
         .flashcard-container {
-          max-width: 50vw;
-          max-height: 50vh;
+          max-width: 60vw;
+          max-height: 40vh;
         }
         .front,
         .back {
@@ -334,13 +334,11 @@
         updateScore();
       } // End of nextCard function
 
-      document.getElementById("submit").addEventListener("click", () => {
-        setTimeout(() => nextCard(), 500);
-      });
+      document.getElementById("submit").addEventListener("click", nextCard);
 
       document.addEventListener("keydown", (event) => {
         if (event.key === "Enter") {
-          setTimeout(() => nextCard(), 500);
+          nextCard();
         }
       });
 
