@@ -160,7 +160,6 @@
         input {
           padding: 6px 12px;
           font-size: 1.5em;
-          top: 30%;
         }
         #score {
           font-size: 1.5em;
@@ -168,6 +167,9 @@
       }
 
       @media (max-width: 1024px) and (orientation: landscape) {
+        body {
+          background-size: auto 100%;
+        }
         h1 {
           font-size: 2em;
         }
@@ -175,17 +177,26 @@
           display: flex;
           flex-direction: row;
           justify-content: space-around;
-          align-items: left;
+          align-items: center;
           width: 100vw;
           height: 100vh;
+          gap: 20px;
         }
         .flashcard-container {
           max-width: 45vw;
           max-height: 70vh;
         }
         .right-panel {
-          align-items: right;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
           max-width: 50vw;
+          gap: 10px;
+        }
+        .input-button {
+          display: flex;
+          gap: 10px;
         }
       }
     </style>
@@ -206,22 +217,22 @@
           <div class="back" id="cardBack"></div>
         </div>
       </div>
-    </div>
 
-    <!-- Input-button -->
-    <div class="right-panel">
-      <div class="input-button">
-        <input id="answer" type="text" />
-        <button id="submit">Svar</button>
-      </div>
-      <div id="alt">
-        <button class="altbuttons"></button>
-        <button class="altbuttons"></button>
-        <button class="altbuttons"></button>
-        <button class="altbuttons"></button>
-      </div>
+      <!-- Input-button -->
+      <div class="right-panel">
+        <div class="input-button">
+          <input id="answer" type="text" />
+          <button id="submit">Svar</button>
+        </div>
+        <div id="alt">
+          <button class="altbuttons"></button>
+          <button class="altbuttons"></button>
+          <button class="altbuttons"></button>
+          <button class="altbuttons"></button>
+        </div>
 
-      <p id="score"></p>
+        <p id="score"></p>
+      </div>
     </div>
 
     <script>
