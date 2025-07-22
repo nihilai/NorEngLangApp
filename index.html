@@ -141,9 +141,9 @@
       #alt {
         display: none;
       }
-      @media (max-width: 560px) {
+      @media (max-width: 640px) {
         h1 {
-          font-size: 2.4em;
+          font-size: 2.4em !important;
         }
         .info {
           font-size: 1.5em;
@@ -151,7 +151,6 @@
         .flashcard-container {
           max-width: 90vw;
           max-height: 70vh;
-          gap: 20px;
         }
         .front,
         .back {
@@ -166,43 +165,6 @@
           font-size: 1.5em;
         }
       }
-
-      @media (max-width: 1024px) and (orientation: landscape) {
-        body {
-          background-size: 100% auto;
-        }
-        h1 {
-          font-size: 2em;
-        }
-        .info {
-          font-size: 1em;
-        }
-        .landscape {
-          display: flex;
-          flex-direction: row;
-          align-items: center;
-          width: 100vw;
-          height: 100vh;
-          gap: 25px;
-        }
-        .flashcard-container {
-          max-width: 25vw;
-          max-height: 60vh;
-        }
-        .right-panel {
-          display: flex;
-          flex-direction: column;
-          align-items: center;
-          justify-content: center;
-          max-width: 40vw;
-          gap: 5px;
-        }
-        .input-button {
-          display: flex;
-          flex-direction: column;
-          gap: 10px;
-        }
-      }
     </style>
   </head>
   <body>
@@ -214,30 +176,26 @@
     </p>
 
     <!-- Flashcard -->
-    <div class="landscape">
-      <div class="flashcard-container">
-        <div class="flashcard" id="flashcard">
-          <div class="front" id="cardFront"></div>
-          <div class="back" id="cardBack"></div>
-        </div>
-      </div>
-
-      <!-- Input-button -->
-      <div class="right-panel">
-        <div class="input-button">
-          <input id="answer" type="text" />
-          <button id="submit">Svar</button>
-        </div>
-        <div id="alt">
-          <button class="altbuttons"></button>
-          <button class="altbuttons"></button>
-          <button class="altbuttons"></button>
-          <button class="altbuttons"></button>
-        </div>
-
-        <p id="score"></p>
+    <div class="flashcard-container">
+      <div class="flashcard" id="flashcard">
+        <div class="front" id="cardFront"></div>
+        <div class="back" id="cardBack"></div>
       </div>
     </div>
+
+    <!-- Input-button -->
+    <div class="input-button">
+      <input id="answer" type="text" />
+      <button id="submit">Svar</button>
+    </div>
+    <div id="alt">
+      <button class="altbuttons"></button>
+      <button class="altbuttons"></button>
+      <button class="altbuttons"></button>
+      <button class="altbuttons"></button>
+    </div>
+
+    <p id="score"></p>
 
     <script>
       let flashCards = [];
