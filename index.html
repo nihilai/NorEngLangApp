@@ -152,8 +152,8 @@
           font-size: 1em;
         }
         .flashcard-container {
-          max-width: 60vw;
-          max-height: 60vh;
+          max-width: 50vw;
+          max-height: 50vh;
         }
         .front,
         .back {
@@ -217,7 +217,6 @@
       }
 
       function nextCard() {
-        total++;
         const userAnswer = document
           .getElementById("answer")
           .value.trim()
@@ -262,7 +261,6 @@
               button.textContent = options[index];
               button.onclick = () => {
                 if (button.textContent === correct) {
-                  total++;
                   score++;
                   currentCard = Math.floor(Math.random() * flashCards.length);
                   updateCard(
@@ -289,7 +287,7 @@
                     card.style.border = `10px solid ${redBorder}`;
                   });
 
-                  (setTimeout) => flipCard(), 2000;
+                  setTimeout(() => flipCard(), 2000);
 
                   setTimeout(() => {
                     cards.forEach((card) => {
@@ -302,7 +300,6 @@
                     );
                   }, 2500);
                 }
-                updateScore();
                 document.getElementById("answer").style.display =
                   "inline-block";
                 document.getElementById("submit").style.display =
@@ -319,7 +316,7 @@
             card.style.border = `10px solid ${redBorder}`;
           });
 
-          (setTimeout) => flipCard(), 2000;
+          setTimeout(() => flipCard(), 2000);
 
           setTimeout(() => {
             cards.forEach((card) => {
@@ -333,14 +330,18 @@
           }, 2500);
         }
         document.getElementById("answer").value = "";
+        total++;
         updateScore();
-      }
+      } // End of nextCard function
 
-      document
-        .getElementById("submit")
-        .addEventListener("click", (setTimeout) => nextCard(), 500);
+      document.getElementById("submit").addEventListener("click", () => {
+        setTimeout(() => nextCard(), 500);
+      });
+
       document.addEventListener("keydown", (event) => {
-        if (event.key === "Enter") (setTimeout) => nextCard, 500;
+        if (event.key === "Enter") {
+          setTimeout(() => nextCard(), 500);
+        }
       });
 
       function updateScore() {
