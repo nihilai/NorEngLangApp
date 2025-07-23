@@ -137,7 +137,7 @@
       }
 
       button:hover {
-        background-color: #f8d52a;
+        background-color: #002868;
       }
 
       #score {
@@ -191,6 +191,14 @@
         font-family: "Noto Serif", sans-serif;
       }
 
+      #email {
+        font-family: Noto Serif, sans-serif;
+      }
+
+      #password {
+        font-family: Noto Serif, sans-serif;
+      }
+
       @media (max-width: 600px) {
         body {
           height: 100dvh;
@@ -224,6 +232,10 @@
         #score {
           font-size: 1.5em;
         }
+        img {
+          width: 40px;
+          height: 24px;
+        }
       }
     </style>
   </head>
@@ -240,7 +252,10 @@
     </div>
 
     <!-- Headline -->
-    <h1>Norwegian to English Bootcamp</h1>
+    <h1>
+      <img src="pics/norflag.png" width="80" height="48" /> Norwegian to English
+      Bootcamp <img src="pics/usflag.jpg" width="80" height="48" />
+    </h1>
     <p class="info">
       Type in the English word and click "Svar" to check your answer.
     </p>
@@ -386,9 +401,9 @@
             flashCards[currentCard].english
           );
           const cards = document.querySelectorAll(".front, .back");
-          const yellowBorder = "#f8d52a";
+          const blueBorder = "#002868";
           cards.forEach((card) => {
-            card.style.border = `10px solid ${yellowBorder}`;
+            card.style.border = `10px solid ${blueBorder}`;
           });
 
           setTimeout(() => {
@@ -425,9 +440,9 @@
                     flashCards[currentCard].english
                   );
                   const cards = document.querySelectorAll(".front, .back");
-                  const yellowBorder = "#f8d52a";
+                  const blueBorder = "#002868";
                   cards.forEach((card) => {
-                    card.style.border = `10px solid ${yellowBorder}`;
+                    card.style.border = `10px solid ${blueBorder}`;
                   });
 
                   setTimeout(() => {
