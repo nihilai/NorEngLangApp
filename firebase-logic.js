@@ -113,9 +113,17 @@ document.querySelectorAll("#email, #password").forEach((input) => {
 });
 
 document.getElementById("logout").onclick = () => {
-  signOut(auth)
-    .then(() => console.log("Signed out"))
-    .catch((err) => alert("Logout error: " + err.message));
+  if (
+    confirm(
+      "Are you sure you want to log out? All unsaved progress will be lost."
+    )
+  ) {
+    signOut(auth)
+      .then(() => console.log("Signed out"))
+      .catch((err) => alert("Logout error: " + err.message));
+  } else {
+    console.log("Logout cancelled");
+  }
 };
 
 async function getTopScores() {

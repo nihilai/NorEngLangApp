@@ -33,6 +33,7 @@
       }
 
       h2 {
+        margin-top: 105px;
         text-shadow: -1.5px -1.5px 0 black, 1.5px -1.5px 0 black,
           -1.5px 1.5px 0 black, 1.5px 1.5px 0 black,
           2px 2px 5px rgba(0, 0, 0, 0.5);
@@ -277,6 +278,8 @@
       }
 
       .login-box {
+        width: 400px;
+        height: 420px;
         background: white;
         background-image: url(pics/card.webp);
         background-position: center;
@@ -285,23 +288,24 @@
         padding: 30px 40px;
         box-shadow: inset 0 0 0 3px #c83737;
         border-radius: 250px;
-        text-align: center;
       }
 
       #loginWindow input,
       #loginWindow button {
-        display: block;
+        display: flex;
+        justify-content: center;
         margin: 10px auto;
       }
 
-      @media (max-width: 600px) {
+      #loginWindow button {
+        display: inline-block;
+      }
+
+      @media (max-width: 800px) {
         html,
         body {
           height: 100%;
           overflow: auto;
-        }
-        body {
-          height: 100dvh;
           background-size: auto 100vh;
         }
 
@@ -311,7 +315,6 @@
 
         .info {
           display: none;
-          font-size: 0.8em;
         }
 
         .container {
@@ -322,6 +325,11 @@
         .scoreboard-container {
           width: 246px;
           height: 360px;
+          margin-top: 30px;
+        }
+
+        .scoreboard-container {
+          margin-top: -10px;
         }
 
         #cardFront,
@@ -341,11 +349,21 @@
           margin-bottom: 20px;
         }
 
+        .login-box {
+          width: 300px;
+          height: 317px;
+          box-shadow: inset 0 0 0 3px #c83737;
+        }
+
         button,
         input,
         #score {
           padding: 4px 8px;
           font-size: 1.2em;
+        }
+
+        h2 {
+          margin-top: 65px;
         }
 
         input {
@@ -359,13 +377,32 @@
       }
 
       @media (max-width: 400px) {
-        body {
-          height: 100dvh;
-          background-size: auto 100vh;
-        }
-
         h1 {
           font-size: 1.6em;
+        }
+
+        #cardFront,
+        #cardBack,
+        #personalScores,
+        #leaderboard {
+          font-size: 1.5em;
+          border-radius: 40px;
+        }
+
+        .answer-submit,
+        #alternatives.show,
+        .score-add-logout {
+          display: flex;
+          justify-content: space-between;
+          width: 80vw;
+          margin-bottom: 15px;
+        }
+
+        button,
+        input,
+        #score {
+          padding: 3px 6px;
+          font-size: 1em;
         }
       }
     </style>
