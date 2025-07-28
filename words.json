@@ -1,7 +1,7 @@
 [
   {
     "norwegian": "som",
-    "english": "who"
+    "english": "as"
   },
   {
     "norwegian": "jeg",
@@ -352,7 +352,7 @@
     "english": "take"
   },
   {
-    "norwegian": "få",
+    "norwegian": "(å) få",
     "english": "get"
   },
   {
@@ -445,7 +445,7 @@
   },
   {
     "norwegian": "tror",
-    "english": "believe"
+    "english": "believes"
   },
   {
     "norwegian": "si",
@@ -1384,8 +1384,8 @@
     "english": "actually"
   },
   {
-    "norwegian": "plass",
-    "english": "room"
+    "norwegian": "plassere",
+    "english": "place"
   },
   {
     "norwegian": "hørt",
@@ -1568,7 +1568,7 @@
     "english": "cell"
   },
   {
-    "norwegian": "tror",
+    "norwegian": "tro",
     "english": "believe"
   },
   {
@@ -1577,7 +1577,7 @@
   },
   {
     "norwegian": "plutselig",
-    "english": "sudden"
+    "english": "suddenly"
   },
   {
     "norwegian": "lengde",
@@ -2253,7 +2253,7 @@
   },
   {
     "norwegian": "visning",
-    "english": "display"
+    "english": "viewing"
   },
   {
     "norwegian": "følelse",
@@ -2288,7 +2288,7 @@
     "english": "operate"
   },
   {
-    "norwegian": "praksis",
+    "norwegian": "øve",
     "english": "practice"
   },
   {
@@ -2320,7 +2320,7 @@
     "english": "hit"
   },
   {
-    "norwegian": "studenten",
+    "norwegian": "student",
     "english": "student"
   },
   {
@@ -2528,10 +2528,6 @@
     "english": "died"
   },
   {
-    "norwegian": "sted",
-    "english": "place"
-  },
-  {
     "norwegian": "drakt",
     "english": "costume"
   },
@@ -2585,7 +2581,7 @@
   },
   {
     "norwegian": "opprinnelig",
-    "english": "original"
+    "english": "originally"
   },
   {
     "norwegian": "aksje",

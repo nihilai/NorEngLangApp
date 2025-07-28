@@ -11,5 +11,8 @@
   "description": "",
   "dependencies": {
     "@google-cloud/translate": "^9.1.0"
+  },
+  "devDependencies": {
+    "eslint": "^9.32.0"
   }
 }

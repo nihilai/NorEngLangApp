@@ -10,43 +10,72 @@
     />
     <style>
       body {
-        display: flex;
-        align-items: center;
-        flex-direction: column;
+        overflow: hidden;
         height: 100vh;
         margin: 0;
-        font-family: "Noto Serif", sans-serif;
         background-size: cover;
         background-position: center;
         background-repeat: no-repeat;
         transition: background-image 1s ease-in-out;
-        text-align: center;
+        font-family: "Noto Serif", serif;
         color: white;
+        text-align: center;
+        text-shadow: -1px -1px 0 black, 1px -1px 0 black, -1px 1px 0 black,
+          1px 1px 0 black, 2px 2px 5px rgba(0, 0, 0, 0.5);
       }
 
       h1 {
-        font-family: "Noto Serif", sans-serif;
         font-size: 4em;
+        margin: 0;
         text-shadow: -1.5px -1.5px 0 black, 1.5px -1.5px 0 black,
           -1.5px 1.5px 0 black, 1.5px 1.5px 0 black,
           2px 2px 5px rgba(0, 0, 0, 0.5);
-        margin: 3px;
+      }
+
+      h2 {
+        text-shadow: -1.5px -1.5px 0 black, 1.5px -1.5px 0 black,
+          -1.5px 1.5px 0 black, 1.5px 1.5px 0 black,
+          2px 2px 5px rgba(0, 0, 0, 0.5);
+      }
+
+      img {
+        box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
       }
 
       .info {
-        font-family: "Noto Serif", sans-serif;
         font-size: 1.2em;
-        text-shadow: -1px -1px 0 black, 1px -1px 0 black, -1px 1px 0 black,
-          1px 1px 0 black, 2px 2px 5px rgba(0, 0, 0, 0.5);
         margin: 3px;
+      }
+
+      /* CONTAINERS */
+
+      .container {
+        display: flex;
+        justify-content: space-evenly;
+        align-items: center;
       }
 
       .flashcard-container {
         perspective: 1000px;
-        width: 273px;
-        height: 400px;
-        margin: 20px auto;
+        width: 328px;
+        height: 480px;
+        margin: 30px;
       }
+
+      .input-container {
+        display: flex;
+        flex-direction: column;
+        margin: 30px;
+      }
+
+      .scoreboard-container {
+        perspective: 1000px;
+        width: 328px;
+        height: 480px;
+        margin: 30px;
+      }
+
+      /* FLASHCARD STYLES */
 
       .flashcard {
         width: 100%;
@@ -61,49 +90,52 @@
         transform: rotateY(180deg);
       }
 
-      .front,
-      .back {
+      #cardFront,
+      #cardBack {
         position: absolute;
         width: 100%;
         height: 100%;
         backface-visibility: hidden;
         border: 10px solid white;
-        border-radius: 45px;
+        border-radius: 51px;
         display: flex;
         justify-content: center;
         align-items: center;
+        box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+        margin: 0;
         font-size: 2em;
         color: white;
         text-shadow: -1.5px -1.5px 0 black, 1.5px -1.5px 0 black,
           -1.5px 1.5px 0 black, 1.5px 1.5px 0 black;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-color: white;
       }
 
-      .front {
+      #cardFront {
         background-image: url(pics/card.webp);
         background-size: cover;
-        background-position: center;
-        background-repeat: no-repeat;
-        box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
       }
 
-      .back {
+      #cardBack {
         background-image: url(pics/hearts.png);
         background-size: 100px;
-        background-color: white;
-        background-position: center;
-        background-repeat: no-repeat;
-        /* box-shadow: inset 0 0 0 8px #c83737, 2px 2px 5px rgba(0, 0, 0, 0.5);*/
         transform: rotateY(180deg);
       }
 
+      /* INPUT AND BUTTON STYLES */
+
+      .answer-submit,
+      #alternatives.show,
+      .score-add-logout {
+        display: flex;
+        justify-content: space-between;
+        width: 450px;
+        margin-bottom: 20px;
+      }
+
       input {
-        display: inline-block;
-        position: relative;
-        top: 30%;
-        right: 3%;
-        color: black;
         font-size: 1.2em;
-        background-color: white;
         font-family: "Noto Serif", sans-serif;
         border: 1.5px solid black;
         border-radius: 5px;
@@ -112,10 +144,6 @@
       }
 
       button {
-        display: inline-block;
-        position: relative;
-        top: 30%;
-        left: 3%;
         color: white;
         font-size: 1.2em;
         font-family: "Noto Serif", sans-serif;
@@ -126,9 +154,8 @@
         background-color: #c83737;
         text-shadow: -0.5px -0.5px 0 black, 0.5px -0.5px 0 black,
           -0.5px 0.5px 0 black, 0.5px 0.5px 0 black;
-        transition: transform 0.2s ease;
-        transition: box-shadow 0.2s ease;
-        transition: background-color 0.2s ease;
+        transition: transform 0.2s ease, box-shadow 0.2s ease,
+          background-color 0.2s ease;
       }
 
       button:active {
@@ -140,26 +167,101 @@
         background-color: #002868;
       }
 
+      #alternatives {
+        visibility: hidden;
+        opacity: 0;
+        height: 0;
+        transition: opacity 0.3s ease;
+      }
+
+      #alternatives.show {
+        visibility: visible;
+        opacity: 1;
+        height: auto;
+        margin-top: -20px;
+      }
+
       #score {
-        display: inline-block;
-        position: relative;
-        top: 10%;
-        right: -5%;
         font-size: 1.5em;
-        text-shadow: -1px -1px 0 black, 1px -1px 0 black, -1px 1px 0 black,
-          1px 1px 0 black, 2px 2px 5px rgba(0, 0, 0, 0.5);
+        margin: 0;
+        gap: 20px;
+        padding-top: 8px;
       }
 
-      #logout {
-        display: inline-block;
+      /* SCOREBOARD STYLES */
+
+      .scoreboard {
+        width: 100%;
+        height: 100%;
         position: relative;
-        top: 10%;
-        left: 38.5%;
+        transform-style: preserve-3d;
+        transition: transform 0.6s;
+        cursor: pointer;
       }
 
-      #alt {
-        display: none;
+      .scoreboard.flipped {
+        transform: rotateY(180deg);
       }
+
+      #leaderboard,
+      #personalScores {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        backface-visibility: hidden;
+        border: 10px solid white;
+        border-radius: 51px;
+        display: flex;
+        flex-direction: column;
+        box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+        margin: 0;
+        font-size: 2em;
+        color: white;
+        text-shadow: -1.5px -1.5px 0 black, 1.5px -1.5px 0 black,
+          -1.5px 1.5px 0 black, 1.5px 1.5px 0 black;
+        background-image: url(pics/cardtrans.webp);
+        background-color: white;
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+      }
+
+      #leaderboard {
+        transform: rotateY(180deg);
+      }
+
+      #personalScoresList,
+      #leaderboardList {
+        position: relative;
+        margin-top: -20px;
+        margin-left: -40px;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      li {
+        list-style-position: inside;
+        list-style-type: upper-roman;
+        width: 100%;
+        height: 100%;
+        font-size: 0.6em;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+      }
+
+      .footer {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+        align-items: center;
+        font-size: 0.6em;
+      }
+
+      /* LOGIN WINDOW STYLES */
 
       .overlay {
         position: fixed;
@@ -167,7 +269,7 @@
         left: 0;
         width: 100vw;
         height: 100vh;
-        background: rgba(0, 0, 0, 0.7);
+        background: rgba(0, 0, 0, 0.8);
         display: flex;
         justify-content: center;
         align-items: center;
@@ -176,30 +278,28 @@
 
       .login-box {
         background: white;
-        padding: 30px;
-        border-radius: 10px;
+        background-image: url(pics/card.webp);
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: auto 180%;
+        padding: 30px 40px;
+        box-shadow: inset 0 0 0 3px #c83737;
+        border-radius: 250px;
         text-align: center;
-        color: black;
-        box-shadow: 0 0 10px black;
       }
 
       #loginWindow input,
       #loginWindow button {
         display: block;
         margin: 10px auto;
-        font-size: 1.2em;
-        font-family: "Noto Serif", sans-serif;
-      }
-
-      #email {
-        font-family: Noto Serif, sans-serif;
-      }
-
-      #password {
-        font-family: Noto Serif, sans-serif;
       }
 
       @media (max-width: 600px) {
+        html,
+        body {
+          height: 100%;
+          overflow: auto;
+        }
         body {
           height: 100dvh;
           background-size: auto 100vh;
@@ -210,31 +310,62 @@
         }
 
         .info {
-          font-size: 1em;
+          display: none;
+          font-size: 0.8em;
         }
 
-        .flashcard-container {
-          max-width: 55vw;
-          max-height: 40vh;
+        .container {
+          flex-direction: column;
         }
 
-        .front,
-        .back {
+        .flashcard-container,
+        .scoreboard-container {
+          width: 246px;
+          height: 360px;
+        }
+
+        #cardFront,
+        #cardBack,
+        #personalScores,
+        #leaderboard {
           font-size: 1.5em;
+          border-radius: 40px;
         }
 
-        #submit,
-        input {
-          padding: 6px 12px;
-          font-size: 1.5em;
+        .answer-submit,
+        #alternatives.show,
+        .score-add-logout {
+          display: flex;
+          justify-content: space-between;
+          width: 80vw;
+          margin-bottom: 20px;
         }
 
+        button,
+        input,
         #score {
-          font-size: 1.5em;
+          padding: 4px 8px;
+          font-size: 1.2em;
         }
+
+        input {
+          width: 60%;
+        }
+
         img {
           width: 40px;
           height: 24px;
+        }
+      }
+
+      @media (max-width: 400px) {
+        body {
+          height: 100dvh;
+          background-size: auto 100vh;
+        }
+
+        h1 {
+          font-size: 1.6em;
         }
       }
     </style>
@@ -251,323 +382,67 @@
       </div>
     </div>
 
-    <!-- Headline -->
     <h1>
-      <img src="pics/norflag.png" width="80" height="48" /> Norwegian to English
-      Bootcamp <img src="pics/usflag.jpg" width="80" height="48" />
+      <picture>
+        <img
+          src="pics/norflag.png"
+          alt="Norwegian flag"
+          width="80"
+          height="48"
+        />
+      </picture>
+      Norwegian to English bootcamp
+      <picture>
+        <img src="pics/usflag.jpg" alt="US flag" width="80" height="48" />
+      </picture>
     </h1>
     <p class="info">
-      Type in the English word and click "Svar" to check your answer.
+      Welcome! This platform is designed to help you learn the basics of
+      Norwegian and gain confidence in your English language skills.
     </p>
 
-    <!-- Flashcard -->
-    <div class="flashcard-container">
-      <div class="flashcard" id="flashcard">
-        <div class="front" id="cardFront"></div>
-        <div class="back" id="cardBack"></div>
+    <div class="container">
+      <div class="flashcard-container">
+        <div class="flashcard" id="flashcard">
+          <div id="cardFront"></div>
+          <div id="cardBack"></div>
+        </div>
+      </div>
+
+      <div class="input-container">
+        <div class="answer-submit">
+          <input id="answer" type="text" />
+          <button id="submit">Answer</button>
+        </div>
+        <div id="alternatives">
+          <button class="altbuttons"></button>
+          <button class="altbuttons"></button>
+          <button class="altbuttons"></button>
+          <button class="altbuttons"></button>
+        </div>
+        <div class="score-add-logout">
+          <p id="score"></p>
+          <button id="add">Add score</button>
+          <button id="logout">Log out</button>
+        </div>
+      </div>
+
+      <div class="scoreboard-container">
+        <div class="scoreboard" id="scoreboard">
+          <div id="personalScores">
+            <h4>Personal scores</h4>
+            <ol id="personalScoresList"></ol>
+            <p class="footer">Flip card for leaderboard</p>
+          </div>
+          <div id="leaderboard">
+            <h4>Leaderboard</h4>
+            <ol id="leaderboardList"></ol>
+            <p class="footer">Flip card for personal scores</p>
+          </div>
+        </div>
       </div>
     </div>
-
-    <!-- Input-button -->
-    <div class="input-button">
-      <input id="answer" type="text" />
-      <button id="submit">Svar</button>
-    </div>
-    <div id="alt">
-      <button class="altbuttons"></button>
-      <button class="altbuttons"></button>
-      <button class="altbuttons"></button>
-      <button class="altbuttons"></button>
-    </div>
-
-    <div>
-      <p id="score"></p>
-      <button id="logout">Log Out</button>
-    </div>
-
-    <script type="module">
-      import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
-      import {
-        getAuth,
-        createUserWithEmailAndPassword,
-        signInWithEmailAndPassword,
-        onAuthStateChanged,
-        sendEmailVerification,
-        signOut,
-        browserSessionPersistence,
-        setPersistence,
-      } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
-
-      // For Firebase JS SDK v7.20.0 and later, measurementId is optional
-      const firebaseConfig = {
-        apiKey: "AIzaSyCCF8zpNR27NuNr_kcsDtMdOcmfvVX9ZGg",
-        authDomain: "norwegian-english-app.firebaseapp.com",
-        projectId: "norwegian-english-app",
-        storageBucket: "norwegian-english-app.firebasestorage.app",
-        messagingSenderId: "650793904999",
-        appId: "1:650793904999:web:a3c33371d01c2aaf625dc2",
-        measurementId: "G-V7J2YQPRW4",
-      };
-
-      const app = initializeApp(firebaseConfig);
-      const auth = getAuth(app);
-      auth.languageCode = "en"; // optional, but required for some Firebase features
-      auth.useDeviceLanguage(); // optional, but required for some Firebase features
-      const loginWindow = document.getElementById("loginWindow");
-
-      setPersistence(auth, browserSessionPersistence)
-        .then(() => {})
-        .catch((err) => {
-          console.error("Persistence set error:", err);
-        });
-
-      onAuthStateChanged(auth, (user) => {
-        if (user && user.emailVerified) {
-          console.log("User is logged in:", user.email);
-          loginWindow.style.display = "none";
-        } else if (user && !user.emailVerified) {
-          alert("Please verify your email before logging in.");
-          signOut(auth);
-        } else {
-          loginWindow.style.display = "flex";
-        }
-      });
-
-      document.getElementById("signup").onclick = () => {
-        const email = document.getElementById("email").value;
-        const pass = document.getElementById("password").value;
-
-        createUserWithEmailAndPassword(auth, email, pass)
-          .then((userCredential) => {
-            console.log("Signed up:", userCredential.user);
-            sendEmailVerification(userCredential.user)
-              .then(() =>
-                alert("Verification email sent. Please check your inbox.")
-              )
-              .catch((err) =>
-                alert("Email verification failed: " + err.message)
-              );
-          })
-          .catch((err) => alert("Signup error: " + err.message));
-      };
-
-      document.getElementById("login").onclick = () => {
-        const email = document.getElementById("email").value;
-        const pass = document.getElementById("password").value;
-
-        signInWithEmailAndPassword(auth, email, pass)
-          .then((user) => console.log("Logged in:", user))
-          .catch((err) => alert("Login error: " + err.message));
-      };
-
-      document.getElementById("logout").onclick = () => {
-        signOut(auth)
-          .then(() => console.log("Signed out"))
-          .catch((err) => alert("Logout error: " + err.message));
-      };
-    </script>
-
-    <script>
-      let flashCards = [];
-      let currentCard = 0;
-      let showingFront = true;
-      let score = 0;
-
-      function startFlashcards() {
-        currentCard = Math.floor(Math.random() * flashCards.length);
-        total = 0;
-        updateCard(
-          flashCards[currentCard].norwegian,
-          flashCards[currentCard].english
-        );
-        updateScore();
-      }
-
-      function nextCard() {
-        const userAnswer = document
-          .getElementById("answer")
-          .value.trim()
-          .toLowerCase();
-        const correctAnswer = flashCards[currentCard].english.toLowerCase();
-
-        if (userAnswer === "") {
-          alert("Please type in the English word.");
-          return;
-        } else if (userAnswer === correctAnswer) {
-          score++;
-          currentCard = Math.floor(Math.random() * flashCards.length);
-          updateCard(
-            flashCards[currentCard].norwegian,
-            flashCards[currentCard].english
-          );
-          const cards = document.querySelectorAll(".front, .back");
-          const blueBorder = "#002868";
-          cards.forEach((card) => {
-            card.style.border = `10px solid ${blueBorder}`;
-          });
-
-          setTimeout(() => {
-            cards.forEach((card) => {
-              card.style.border = `10px solid white`;
-            });
-          }, 1000);
-          if (score % 5 === 0 && score > 0) {
-            document.getElementById("answer").style.display = "none";
-            document.getElementById("submit").style.display = "none";
-            document.getElementById("alt").style.display = "inline-block";
-
-            const altButtons = document.querySelectorAll(".altbuttons");
-            const correct = flashCards[currentCard].english.toLowerCase();
-            const alternatives = flashCards
-              .filter((card) => card.english.toLowerCase() !== correct)
-              .sort(() => 0.5 - Math.random())
-              .slice(0, 3)
-              .map((card) => card.english);
-            const options = [...alternatives, correct].sort(
-              () => 0.5 - Math.random()
-            );
-
-            altButtons.forEach((button, index) => {
-              button.textContent = options[index];
-              button.onclick = () => {
-                if (button.textContent === correct) {
-                  total++;
-                  score++;
-                  updateScore();
-                  currentCard = Math.floor(Math.random() * flashCards.length);
-                  updateCard(
-                    flashCards[currentCard].norwegian,
-                    flashCards[currentCard].english
-                  );
-                  const cards = document.querySelectorAll(".front, .back");
-                  const blueBorder = "#002868";
-                  cards.forEach((card) => {
-                    card.style.border = `10px solid ${blueBorder}`;
-                  });
-
-                  setTimeout(() => {
-                    cards.forEach((card) => {
-                      card.style.border = `10px solid white`;
-                    });
-                  }, 1000);
-                } else if (button.textContent !== correct) {
-                  total++;
-                  updateScore();
-                  flipCard();
-                  const cards = document.querySelectorAll(".front, .back");
-                  const redBorder = "#c83737";
-                  cards.forEach((card) => {
-                    card.style.border = `10px solid ${redBorder}`;
-                  });
-
-                  setTimeout(() => flipCard(), 2000);
-
-                  setTimeout(() => {
-                    cards.forEach((card) => {
-                      card.style.border = `10px solid white`;
-                    });
-                    currentCard = Math.floor(Math.random() * flashCards.length);
-                    updateCard(
-                      flashCards[currentCard].norwegian,
-                      flashCards[currentCard].english
-                    );
-                  }, 2500);
-                }
-                document.getElementById("answer").style.display =
-                  "inline-block";
-                document.getElementById("submit").style.display =
-                  "inline-block";
-                document.getElementById("alt").style.display = "none";
-              };
-            });
-          }
-        } else {
-          flipCard();
-          const cards = document.querySelectorAll(".front, .back");
-          const redBorder = "#c83737";
-          cards.forEach((card) => {
-            card.style.border = `10px solid ${redBorder}`;
-          });
-
-          setTimeout(() => flipCard(), 2000);
-
-          setTimeout(() => {
-            cards.forEach((card) => {
-              card.style.border = `10px solid white`;
-            });
-            currentCard = Math.floor(Math.random() * flashCards.length);
-            updateCard(
-              flashCards[currentCard].norwegian,
-              flashCards[currentCard].english
-            );
-          }, 2500);
-        }
-        document.getElementById("answer").value = "";
-        total++;
-        updateScore();
-      } // End of nextCard function
-
-      document.getElementById("submit").addEventListener("click", nextCard);
-
-      document.addEventListener("keydown", (event) => {
-        if (event.key === "Enter") {
-          nextCard();
-        }
-      });
-
-      function updateScore() {
-        document.getElementById(
-          "score"
-        ).textContent = `Score: ${score} / ${total}`;
-      }
-
-      function flipCard() {
-        document.getElementById("flashcard").classList.toggle("flipped");
-        showingFront = !showingFront;
-      }
-
-      function updateCard(nor, eng) {
-        document.getElementById("cardFront").textContent = nor;
-        document.getElementById("cardBack").textContent = eng;
-      }
-
-      // JSON fetching
-      fetch("words.json")
-        .then((response) => response.json())
-        .then((data) => {
-          flashCards = data;
-          startFlashcards();
-        })
-        .catch((error) => console.error("Error loading JSON:", error));
-
-      // Bakgrunnsbilder
-
-      const imageUrl = [
-        "pics/5h.jpg",
-        "pics/10h.jpg",
-        "pics/11h.jpg",
-        "pics/8h.jpg",
-        "pics/4h.jpg",
-        "pics/6h.jpg",
-        "pics/3h.jpg",
-        "pics/12h.jpg",
-      ];
-
-      let background = imageUrl.map((url) => `url('${url}')`);
-      let index = 0;
-
-      imageUrl.forEach((src) => {
-        const img = new Image();
-        img.src = src;
-      });
-
-      function changeBackground() {
-        document.body.style.backgroundImage = background[index];
-        index = (index + 1) % background.length;
-      }
-
-      changeBackground();
-      setInterval(changeBackground, 180000);
-    </script>
+    <script type="module" src="firebase-logic.js"></script>
+    <script src="script.js"></script>
   </body>
 </html>
