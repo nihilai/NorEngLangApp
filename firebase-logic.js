@@ -118,6 +118,10 @@ document.getElementById("logout").onclick = () => {
       "Are you sure you want to log out? All unsaved progress will be lost."
     )
   ) {
+    if (typeof window.resetProgress === "function") {
+      window.resetProgress();
+    }
+    document.getElementById("answer").value = "";
     signOut(auth)
       .then(() => console.log("Signed out"))
       .catch((err) => alert("Logout error: " + err.message));

@@ -4,6 +4,13 @@ let showingFront = true;
 let score = 0;
 let total = 0;
 
+window.resetProgress = function () {
+  score = 0;
+  total = 0;
+  document.getElementById("score").textContent = "Score: 0 / 0";
+  document.getElementById("answer").value = "";
+};
+
 function startFlashcards() {
   currentCard = Math.floor(Math.random() * flashCards.length);
   total = 0;
@@ -65,6 +72,10 @@ function nextCard() {
             total++;
             score++;
             updateScore();
+            setTimeout(() => {
+              document.getElementById("answer").focus();
+            }, 10);
+
             currentCard = Math.floor(Math.random() * flashCards.length);
             updateCard(
               flashCards[currentCard].norwegian,
@@ -84,6 +95,10 @@ function nextCard() {
           } else if (button.textContent !== correct) {
             total++;
             updateScore();
+            setTimeout(() => {
+              document.getElementById("answer").focus();
+            }, 10);
+
             flipCard();
             const cards = document.querySelectorAll("#cardFront, #cardBack");
             const redBorder = "#c83737";
