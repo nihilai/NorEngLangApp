@@ -9,55 +9,119 @@
       rel="stylesheet"
     />
     <style>
+      :root {
+        --primary-color: #1e1817;
+        --secondary-color: #332926;
+        --tertiary-color: #a2422e;
+        --quaternary-color: #efefe3;
+        --text-color: floralwhite;
+        font-size: 1.2rem;
+      }
+
+      @font-face {
+        font-family: "Runebig";
+        src: url("fonts/NorseBold-2Kge.otf") format("opentype");
+      }
+
+      @font-face {
+        font-family: "Runesmall";
+        src: url("fonts/Norse-KaWl.otf") format("opentype");
+      }
+
       body {
-        overflow: hidden;
         height: 100vh;
         margin: 0;
-        background-size: cover;
-        background-position: center;
+        background-color: var(--quaternary-color);
+        background-image: url(pics/ornament2.jpg);
+        background-size: 30%;
+        background-position: center 30%;
         background-repeat: no-repeat;
-        transition: background-image 1s ease-in-out;
-        font-family: "Noto Serif", serif;
-        color: white;
+        font-family: "Runebig", serif;
+        color: var(--text-color);
         text-align: center;
-        text-shadow: -1px -1px 0 black, 1px -1px 0 black, -1px 1px 0 black,
-          1px 1px 0 black, 2px 2px 5px rgba(0, 0, 0, 0.5);
+      }
+
+      .pictures {
+        border: 20px solid var(--primary-color);
+        width: 70vw;
+        height: 70vh;
+        margin: 50px auto 50px auto;
+        background-color: var(--primary-color);
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center;
+        transition: background-image 1s ease-in-out,
+          background-position 1s ease-in-out, background-size 1s ease-in-out;
+        font-family: "Runebig", serif;
+        color: var(--text-color);
+        text-align: center;
+      }
+
+      header {
+        display: flex;
+        align-items: center;
+        background: linear-gradient(
+          to right,
+          var(--secondary-color) 0%,
+          var(--primary-color) 10%,
+          var(--primary-color) 90%,
+          var(--secondary-color) 100%
+        );
+        text-shadow: -1.5px -1.5px 0 black, 1.5px -1.5px 0 black,
+          -1.5px 1.5px 0 black, 1.5px 1.5px 0 black;
       }
 
       h1 {
-        background-color: #c83737;
-        font-size: 4em;
+        font-size: 1.3em;
         margin: 0;
-        text-shadow: -1.5px -1.5px 0 black, 1.5px -1.5px 0 black,
-          -1.5px 1.5px 0 black, 1.5px 1.5px 0 black,
-          2px 2px 5px rgba(0, 0, 0, 0.5);
+        text-shadow: -2px -2px 0 black, 2px -2px 0 black, -2px 2px 0 black,
+          2px 2px 0 black;
       }
 
-      h2 {
-        margin-top: 105px;
-        text-shadow: -1.5px -1.5px 0 black, 1.5px -1.5px 0 black,
-          -1.5px 1.5px 0 black, 1.5px 1.5px 0 black,
-          2px 2px 5px rgba(0, 0, 0, 0.5);
-      }
-
-      img {
-        box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
-      }
-
-      .info {
-        font-size: 1.2em;
-        padding-bottom: 10px;
+      #norenga1 {
+        display: inline-block;
         margin: 0;
-        background-color: #c83737;
+        position: relative;
+        top: 10px;
       }
 
-      .foot {
-        text-align: center;
-        font-style: italic;
+      #norenga2 {
+        display: inline-block;
+        margin: 0;
+        position: relative;
+        top: -10px;
+        font-size: 0.8em;
+      }
+
+      nav ul {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
         width: 100%;
-        margin-top: 20px;
-        height: 25px;
-        background-color: #c83737;
+        list-style: none;
+        margin: 0;
+        font-size: 2em;
+        gap: 100px;
+        text-align: center;
+        font-weight: bold;
+      }
+
+      nav {
+        width: 100%;
+        height: 80px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      a {
+        color: var(--text-color);
+        text-decoration: none;
+        cursor: pointer;
+      }
+
+      a span {
+        display: block;
       }
 
       /* CONTAINERS */
@@ -70,22 +134,22 @@
 
       .flashcard-container {
         perspective: 1000px;
-        width: 328px;
-        height: 480px;
-        margin: 30px;
+        width: 350px;
+        height: 500px;
+        margin: 40px;
       }
 
       .input-container {
         display: flex;
         flex-direction: column;
-        margin: 30px;
+        margin: 430px 30px 0 30px;
       }
 
       .scoreboard-container {
         perspective: 1000px;
-        width: 328px;
-        height: 480px;
-        margin: 30px;
+        width: 350px;
+        height: 500px;
+        margin: 40px;
       }
 
       /* FLASHCARD STYLES */
@@ -108,31 +172,36 @@
         position: absolute;
         width: 100%;
         height: 100%;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-color: var(--text-color);
         backface-visibility: hidden;
-        border: 10px solid white;
-        border-radius: 51px;
+        border: 10px solid var(--text-color);
+        border-radius: 50px;
         display: flex;
         justify-content: center;
         align-items: center;
         box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
         margin: 0;
-        font-size: 2em;
-        color: white;
+        font-size: 3em;
+        color: var(--text-color);
         text-shadow: -1.5px -1.5px 0 black, 1.5px -1.5px 0 black,
           -1.5px 1.5px 0 black, 1.5px 1.5px 0 black;
-        background-position: center;
-        background-repeat: no-repeat;
-        background-color: white;
       }
 
       #cardFront {
-        background-image: url(pics/card.webp);
-        background-size: cover;
+        background-image: url(pics/viking8f.jpg);
+        background-size: 130%;
+        background-position: 43% 70%;
+        background-repeat: no-repeat;
       }
 
       #cardBack {
-        background-image: url(pics/hearts.png);
-        background-size: 100px;
+        background-image: url(pics/ornament4.jpg);
+        background-color: var(--text-color);
+        background-size: 100%;
+        background-position: center;
+        background-repeat: no-repeat;
         transform: rotateY(180deg);
       }
 
@@ -143,30 +212,31 @@
       .score-add-logout {
         display: flex;
         justify-content: space-between;
-        width: 450px;
+        width: 420px;
         margin-bottom: 20px;
       }
 
       input {
-        font-size: 1.2em;
-        font-family: "Noto Serif", sans-serif;
+        width: 50%;
+        font-size: 1.5em;
+        font-family: "Runesmall", sans-serif;
         border: 1.5px solid black;
         border-radius: 5px;
         padding: 10px 20px;
         box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+        color: var(--secondary-color);
       }
 
       button {
-        color: white;
-        font-size: 1.2em;
-        font-family: "Noto Serif", sans-serif;
+        color: var(--text-color);
+        font-size: 1.5em;
+        font-family: "Runesmall", sans-serif;
         border: 1.5px solid black;
         border-radius: 5px;
         padding: 10px 20px;
         box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
-        background-color: #c83737;
-        text-shadow: -0.5px -0.5px 0 black, 0.5px -0.5px 0 black,
-          -0.5px 0.5px 0 black, 0.5px 0.5px 0 black;
+        background-color: var(--secondary-color);
+        text-shadow: none;
         transition: transform 0.2s ease, box-shadow 0.2s ease,
           background-color 0.2s ease;
       }
@@ -177,7 +247,7 @@
       }
 
       button:hover {
-        background-color: #002868;
+        background-color: var(--primary-color);
       }
 
       #alternatives {
@@ -195,10 +265,20 @@
       }
 
       #score {
+        display: flex;
+        justify-content: center;
+        width: 50%;
+        align-items: center;
+        font-family: "Runesmall", sans-serif;
         font-size: 1.5em;
+        border: 1.5px solid black;
+        border-radius: 5px;
+        padding: 10px 20px;
+        box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
         margin: 0;
         gap: 20px;
-        padding-top: 8px;
+        color: var(--secondary-color);
+        background-color: white;
       }
 
       /* SCOREBOARD STYLES */
@@ -222,31 +302,33 @@
         width: 100%;
         height: 100%;
         backface-visibility: hidden;
-        border: 10px solid white;
-        border-radius: 51px;
+        border: 10px solid var(--text-color);
+        border-radius: 50px;
         display: flex;
         flex-direction: column;
         box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
         margin: 0;
         font-size: 2em;
-        color: white;
-        text-shadow: -1.5px -1.5px 0 black, 1.5px -1.5px 0 black,
-          -1.5px 1.5px 0 black, 1.5px 1.5px 0 black;
-        background-image: url(pics/cardtrans.webp);
-        background-color: white;
-        background-size: cover;
-        background-position: center;
+        color: var(--text-color);
+        background-image: url(pics/viking5f.jpg);
+        background-size: 130%;
+        background-position: 10% 30%;
         background-repeat: no-repeat;
       }
 
       #leaderboard {
+        background-image: url(pics/ornament4.jpg);
+        color: var(--text-color);
+        background-size: 100%;
+        background-position: center;
+        background-repeat: no-repeat;
+        border: 10px solid var(--text-color);
         transform: rotateY(180deg);
       }
 
       #personalScoresList,
       #leaderboardList {
         position: relative;
-        margin-top: -20px;
         margin-left: -40px;
         display: flex;
         flex-direction: column;
@@ -271,7 +353,22 @@
         flex-direction: column;
         justify-content: flex-end;
         align-items: center;
+        font-family: "Runesmall", sans-serif;
         font-size: 0.6em;
+      }
+
+      footer {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background: linear-gradient(
+          to right,
+          var(--secondary-color) 0%,
+          var(--primary-color) 10%,
+          var(--primary-color) 90%,
+          var(--secondary-color) 100%
+        );
+        font-family: "Runesmall", sans-serif;
       }
 
       /* LOGIN WINDOW STYLES */
@@ -282,24 +379,38 @@
         left: 0;
         width: 100vw;
         height: 100vh;
-        background-color: black;
         display: flex;
         justify-content: center;
         align-items: center;
+        background: radial-gradient(rgba(0, 0, 0, 0.5), black);
         z-index: 1000;
       }
 
       .login-box {
         width: 400px;
-        height: 420px;
-        background: white;
-        background-image: url(pics/card.webp);
+        height: 400px;
+        background: var(--text-color);
+        background-image: url(pics/natur1.jpg);
         background-position: center;
         background-repeat: no-repeat;
-        background-size: auto 180%;
-        padding: 30px 40px;
-        box-shadow: inset 0 0 0 3px #c83737;
-        border-radius: 250px;
+        background-size: auto 100%;
+        padding: 30px 30px;
+        border: solid 12px var(--text-color);
+        border-radius: 50px;
+      }
+
+      h2 {
+        margin: 10px 0 120px 0;
+        font-size: 2.5em;
+        text-shadow: -0.6px -0.6px 0 black, 0.6px -0.6px 0 black,
+          -0.6px 0.6px 0 black, 0.6px 0.6px 0 black;
+      }
+
+      h4 {
+        margin: 10px 0 0 0;
+        font-size: 1.2em;
+        /*text-shadow: -1.5px -1.5px 0 black, 1.5px -1.5px 0 black,
+          -1.5px 1.5px 0 black, 1.5px 1.5px 0 black;*/
       }
 
       #loginWindow input,
@@ -309,65 +420,79 @@
         margin: 10px auto;
       }
 
+      #loginWindow input {
+        width: 70%;
+        color: var(--primary-color);
+      }
+
       #loginWindow button {
         display: inline-block;
-        margin: 10px;
+        margin: 10px 20px;
+        font-family: "Runesmall", serif;
+        font-size: 1.5em;
+        background: var(--secondary-color);
       }
 
       @media (max-width: 800px) {
+        /*media 800*/
         html,
         body {
           height: 100%;
+          background-size: 20%;
           overflow: auto;
           background-size: auto 100vh;
         }
 
+        /*media 800*/
         h1 {
-          font-size: 2em;
+          font-size: 1.3em;
+          text-shadow: -1.5px -1.5px 0 black, 1.5px -1.5px 0 black,
+            -1.5px 1.5px 0 black, 1.5px 1.5px 0 black, 1px 1px 0 black;
         }
 
-        .info {
-          display: none;
-        }
-
+        /*media 800*/
         .container {
           flex-direction: column;
         }
 
+        /*media 800*/
         .flashcard-container,
         .scoreboard-container {
-          width: 246px;
-          height: 360px;
-          margin-top: 30px;
+          width: 280px;
+          height: 400px;
+          margin-top: 20px;
         }
 
-        .scoreboard-container {
-          margin-top: -10px;
-        }
-
+        /*media 800*/
         #cardFront,
         #cardBack,
         #personalScores,
         #leaderboard {
-          font-size: 1.5em;
+          font-size: 2em;
           border-radius: 40px;
         }
 
+        /*media 800*/
         .answer-submit,
         #alternatives.show,
         .score-add-logout {
           display: flex;
           justify-content: space-between;
           width: 80vw;
-          margin-bottom: 20px;
         }
 
+        .input-container {
+          margin: 10px;
+        }
+
+        /*media 800*/
         .login-box {
           width: 300px;
           height: 300px;
-          box-shadow: inset 0 0 0 3px #c83737;
+          border: solid 12px var(--secondary-color);
         }
 
+        /*media 800*/
         button,
         input,
         #score {
@@ -375,25 +500,46 @@
           font-size: 1.2em;
         }
 
+        /*media 800*/
+        #score {
+          width: 60%;
+        }
+
+        /*media 800*/
         h2 {
           margin-top: 65px;
         }
 
+        /*media 800*/
         input {
           width: 60%;
         }
 
-        img {
-          width: 40px;
-          height: 24px;
+        /*media 800*/
+        #nor {
+          width: 22px;
+          height: 16px;
+        }
+
+        /*media 800*/
+        #gbr {
+          width: 30px;
+          height: 15px;
         }
       }
 
       @media (max-width: 400px) {
+        /*media 400*/
+        body {
+          background-size: 20%;
+        }
+
+        /*media 400*/
         h1 {
           font-size: 1.6em;
         }
 
+        /*media 400*/
         #cardFront,
         #cardBack,
         #personalScores,
@@ -402,6 +548,7 @@
           border-radius: 40px;
         }
 
+        /*media 400*/
         .answer-submit,
         #alternatives.show,
         .score-add-logout {
@@ -411,11 +558,17 @@
           margin-bottom: 15px;
         }
 
+        /*media 400*/
         button,
         input,
         #score {
           padding: 3px 6px;
           font-size: 1em;
+        }
+
+        /*media 400*/
+        #score {
+          width: 60%;
         }
       }
     </style>
@@ -432,24 +585,28 @@
       </div>
     </div>
 
-    <h1>
-      <picture>
-        <img
-          src="pics/norflag.png"
-          alt="Norwegian flag"
-          width="80"
-          height="48"
-        />
-      </picture>
-      Norwegian to English bootcamp
-      <picture>
-        <img src="pics/usflag.jpg" alt="US flag" width="80" height="48" />
-      </picture>
-    </h1>
-    <p class="info">
-      Welcome! This platform is designed to help you learn the basics of
-      Norwegian and gain confidence in your English language skills.
-    </p>
+    <header>
+      <nav>
+        <ul id="menu">
+          <h1>
+            <span id="norenga1">Nor</span>
+            <span id="norenga2">enga</span>
+          </h1>
+          <li><a href="index.html">Home</a></li>
+          <li>
+            <a href="scores.html"><span>Your</span><span>scores</span></a>
+          </li>
+          <li>
+            <a href="topscores.html"><span>Top</span><span>scores</span></a>
+          </li>
+          <li><a href="terms.html">Terms of Service</a></li>
+          <li><a href="contact.html">Contact</a></li>
+          <li>
+            <a id="logout"><span>Log</span><span>out</span></a>
+          </li>
+        </ul>
+      </nav>
+    </header>
 
     <div class="container">
       <div class="flashcard-container">
@@ -473,7 +630,6 @@
         <div class="score-add-logout">
           <p id="score"></p>
           <button id="add">Add score</button>
-          <button id="logout">Log out</button>
         </div>
       </div>
 
@@ -492,7 +648,12 @@
         </div>
       </div>
     </div>
-    <div class="foot">By Nikolai Myhre 2025</div>
+
+    <div class="pictures"></div>
+
+    <footer>
+      <p>Made by Nikolai Myhre with Viking love and Vscode</p>
+    </footer>
     <script type="module" src="firebase-logic.js"></script>
     <script src="script.js"></script>
   </body>

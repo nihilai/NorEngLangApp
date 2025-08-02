@@ -21,6 +21,10 @@ function startFlashcards() {
   updateScore();
 }
 
+/*document.getElementById("menu").addEventListener("click", () => {
+  document.getElementById("icon").classList.toggle("open");
+});*/
+
 function nextCard() {
   const userAnswer = document
     .getElementById("answer")
@@ -39,16 +43,16 @@ function nextCard() {
       flashCards[currentCard].english
     );
     const cards = document.querySelectorAll("#cardFront, #cardBack");
-    const blueBorder = "#002868";
+    const blueBorder = "#332926";
     cards.forEach((card) => {
       card.style.border = `10px solid ${blueBorder}`;
     });
 
     setTimeout(() => {
       cards.forEach((card) => {
-        card.style.border = `10px solid white`;
+        card.style.border = `10px solid floralwhite`;
       });
-    }, 1000);
+    }, 1500);
     if (score % 5 === 0 && score > 0) {
       document.getElementById("answer").style.display = "none";
       document.getElementById("submit").style.display = "none";
@@ -82,16 +86,16 @@ function nextCard() {
               flashCards[currentCard].english
             );
             const cards = document.querySelectorAll("#cardFront, #cardBack");
-            const blueBorder = "#002868";
+            const blueBorder = "#332926";
             cards.forEach((card) => {
               card.style.border = `10px solid ${blueBorder}`;
             });
 
             setTimeout(() => {
               cards.forEach((card) => {
-                card.style.border = `10px solid white`;
+                card.style.border = `10px solid floralwhite`;
               });
-            }, 1000);
+            }, 1500);
           } else if (button.textContent !== correct) {
             total++;
             updateScore();
@@ -101,23 +105,23 @@ function nextCard() {
 
             flipCard();
             const cards = document.querySelectorAll("#cardFront, #cardBack");
-            const redBorder = "#c83737";
+            const redBorder = "#1e1817";
             cards.forEach((card) => {
               card.style.border = `10px solid ${redBorder}`;
             });
 
-            setTimeout(() => flipCard(), 1200);
+            setTimeout(() => flipCard(), 1700);
 
             setTimeout(() => {
               cards.forEach((card) => {
-                card.style.border = `10px solid white`;
+                card.style.border = `10px solid floralwhite`;
               });
               currentCard = Math.floor(Math.random() * flashCards.length);
               updateCard(
                 flashCards[currentCard].norwegian,
                 flashCards[currentCard].english
               );
-            }, 1350);
+            }, 1850);
           }
           document.getElementById("answer").style.display = "inline-block";
           document.getElementById("submit").style.display = "inline-block";
@@ -128,23 +132,23 @@ function nextCard() {
   } else {
     flipCard();
     const cards = document.querySelectorAll("#cardFront, #cardBack");
-    const redBorder = "#c83737";
+    const redBorder = "#1e1817";
     cards.forEach((card) => {
       card.style.border = `10px solid ${redBorder}`;
     });
 
-    setTimeout(() => flipCard(), 1200);
+    setTimeout(() => flipCard(), 1700);
 
     setTimeout(() => {
       cards.forEach((card) => {
-        card.style.border = `10px solid white`;
+        card.style.border = `10px solid floralwhite`;
       });
       currentCard = Math.floor(Math.random() * flashCards.length);
       updateCard(
         flashCards[currentCard].norwegian,
         flashCards[currentCard].english
       );
-    }, 1350);
+    }, 1850);
   }
 
   if (score % 50 === 0 && score > 0) {
@@ -209,29 +213,26 @@ fetch("words.json")
   })
   .catch((error) => console.error("Error loading JSON:", error));
 
-const imageUrl = [
-  "pics/5h.jpg",
-  "pics/10h.jpg",
-  "pics/11h.jpg",
-  "pics/8h.jpg",
-  "pics/4h.jpg",
-  "pics/6h.jpg",
-  "pics/3h.jpg",
-  "pics/12h.jpg",
+const images = [
+  { url: "pics/natur1.jpg", position: "center center" },
+  { url: "pics/viking6f.jpg", position: "center 70%" },
+  { url: "pics/natur4.jpg", position: "center center" },
 ];
 
-let background = imageUrl.map((url) => `url('${url}')`);
 let index = 0;
 
-imageUrl.forEach((src) => {
+images.forEach(({ url }) => {
   const img = new Image();
-  img.src = src;
+  img.src = url;
 });
 
 function changeBackground() {
-  document.body.style.backgroundImage = background[index];
-  index = (index + 1) % background.length;
+  const bg = images[index];
+  const pictures = document.querySelector(".pictures");
+  pictures.style.backgroundImage = `url('${bg.url}')`;
+  pictures.style.backgroundPosition = bg.position;
+  index = (index + 1) % images.length;
 }
 
 changeBackground();
-setInterval(changeBackground, 180000);
+setInterval(changeBackground, 3000);
