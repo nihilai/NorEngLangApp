@@ -14,10 +14,7 @@ window.resetProgress = function () {
 function startFlashcards() {
   currentCard = Math.floor(Math.random() * flashCards.length);
   total = 0;
-  updateCard(
-    flashCards[currentCard].norwegian,
-    flashCards[currentCard].english
-  );
+  updateCard(flashCards[currentCard].norwegian, flashCards[currentCard].english);
   updateScore();
 }
 
@@ -26,10 +23,7 @@ function startFlashcards() {
 });*/
 
 function nextCard() {
-  const userAnswer = document
-    .getElementById("answer")
-    .value.trim()
-    .toLowerCase();
+  const userAnswer = document.getElementById("answer").value.trim().toLowerCase();
   const correctAnswer = flashCards[currentCard].english.toLowerCase();
 
   if (userAnswer === "") {
@@ -38,10 +32,7 @@ function nextCard() {
   } else if (userAnswer === correctAnswer) {
     score++;
     currentCard = Math.floor(Math.random() * flashCards.length);
-    updateCard(
-      flashCards[currentCard].norwegian,
-      flashCards[currentCard].english
-    );
+    updateCard(flashCards[currentCard].norwegian, flashCards[currentCard].english);
     const cards = document.querySelectorAll("#cardFront, #cardBack");
     const blueBorder = "#332926";
     cards.forEach((card) => {
@@ -65,9 +56,7 @@ function nextCard() {
         .sort(() => 0.5 - Math.random())
         .slice(0, 3)
         .map((card) => card.english);
-      const options = [...alternatives, correct].sort(
-        () => 0.5 - Math.random()
-      );
+      const options = [...alternatives, correct].sort(() => 0.5 - Math.random());
 
       altButtons.forEach((button, index) => {
         button.textContent = options[index];
@@ -81,10 +70,7 @@ function nextCard() {
             }, 10);
 
             currentCard = Math.floor(Math.random() * flashCards.length);
-            updateCard(
-              flashCards[currentCard].norwegian,
-              flashCards[currentCard].english
-            );
+            updateCard(flashCards[currentCard].norwegian, flashCards[currentCard].english);
             const cards = document.querySelectorAll("#cardFront, #cardBack");
             const blueBorder = "#332926";
             cards.forEach((card) => {
@@ -117,10 +103,7 @@ function nextCard() {
                 card.style.border = `10px solid floralwhite`;
               });
               currentCard = Math.floor(Math.random() * flashCards.length);
-              updateCard(
-                flashCards[currentCard].norwegian,
-                flashCards[currentCard].english
-              );
+              updateCard(flashCards[currentCard].norwegian, flashCards[currentCard].english);
             }, 1850);
           }
           document.getElementById("answer").style.display = "inline-block";
@@ -144,17 +127,12 @@ function nextCard() {
         card.style.border = `10px solid floralwhite`;
       });
       currentCard = Math.floor(Math.random() * flashCards.length);
-      updateCard(
-        flashCards[currentCard].norwegian,
-        flashCards[currentCard].english
-      );
+      updateCard(flashCards[currentCard].norwegian, flashCards[currentCard].english);
     }, 1850);
   }
 
   if (score % 50 === 0 && score > 0) {
-    alert(
-      `Congratulations! You've answered ${score} questions correctly! Score added to leaderboard.`
-    );
+    alert(`Congratulations! You've answered ${score} questions correctly! Score added to leaderboard.`);
     const leaderboardList = document.getElementById("leaderboardList");
     const li = document.createElement("li");
     li.textContent = `${new Date().toLocaleDateString()}: ${score} / ${total} correct.`;
@@ -204,6 +182,20 @@ function updateCard(nor, eng) {
   document.getElementById("cardFront").textContent = nor;
   document.getElementById("cardBack").textContent = eng;
 }
+
+const burger = document.getElementById("burger");
+const menu = document.getElementById("menu");
+
+burger.addEventListener("click", (e) => {
+  e.stopPropagation();
+  menu.classList.toggle("open");
+});
+
+window.addEventListener("click", (e) => {
+  if (!menu.contains(e.target) && !burger.contains(e.target)) {
+    menu.classList.remove("open");
+  }
+});
 
 fetch("words.json")
   .then((response) => response.json())

@@ -4,16 +4,14 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Norwegian to English Flashcards</title>
-    <link
-      href="https://fonts.googleapis.com/css2?family=Noto+Serif:wght@400;700&display=swap"
-      rel="stylesheet"
-    />
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif:wght@400;700&display=swap" rel="stylesheet" />
     <style>
       :root {
         --primary-color: #1e1817;
         --secondary-color: #332926;
         --tertiary-color: #a2422e;
         --quaternary-color: #efefe3;
+        --quinary-color: #353533;
         --text-color: floralwhite;
         font-size: 1.2rem;
       }
@@ -50,8 +48,7 @@
         background-size: cover;
         background-repeat: no-repeat;
         background-position: center;
-        transition: background-image 1s ease-in-out,
-          background-position 1s ease-in-out, background-size 1s ease-in-out;
+        transition: background-image 1s ease-in-out, background-position 1s ease-in-out, background-size 1s ease-in-out;
         font-family: "Runebig", serif;
         color: var(--text-color);
         text-align: center;
@@ -60,40 +57,42 @@
       header {
         display: flex;
         align-items: center;
-        background: linear-gradient(
-          to right,
-          var(--secondary-color) 0%,
-          var(--primary-color) 10%,
-          var(--primary-color) 90%,
-          var(--secondary-color) 100%
-        );
-        text-shadow: -1.5px -1.5px 0 black, 1.5px -1.5px 0 black,
-          -1.5px 1.5px 0 black, 1.5px 1.5px 0 black;
+        background: linear-gradient(to right, var(--secondary-color) 0%, var(--primary-color) 10%, var(--primary-color) 90%, var(--secondary-color) 100%);
+        text-shadow: -1.5px -1.5px 0 black, 1.5px -1.5px 0 black, -1.5px 1.5px 0 black, 1.5px 1.5px 0 black;
+      }
+
+      .burger {
+        display: none;
+        font-size: 2.5em;
+        color: var(--text-color);
+        background: none;
+        border: none;
+        cursor: pointer;
+        box-shadow: none;
       }
 
       h1 {
-        font-size: 1.3em;
-        margin: 0;
-        text-shadow: -2px -2px 0 black, 2px -2px 0 black, -2px 2px 0 black,
-          2px 2px 0 black;
+        margin: 0 0 0 20px;
+        text-shadow: -2px -2px 0 black, 2px -2px 0 black, -2px 2px 0 black, 2px 2px 0 black;
       }
 
-      #norenga1 {
-        display: inline-block;
+      #norenga1,
+      #norenga2 {
         margin: 0;
+        display: inline-block;
         position: relative;
-        top: 10px;
+        font-size: 1.5em;
+        top: 4px;
       }
 
       #norenga2 {
+        font-size: 1.2em;
         display: inline-block;
         margin: 0;
-        position: relative;
-        top: -10px;
-        font-size: 0.8em;
+        top: -4px;
       }
 
-      nav ul {
+      #menu {
         display: flex;
         justify-content: space-between;
         align-items: center;
@@ -110,7 +109,7 @@
         width: 100%;
         height: 80px;
         display: flex;
-        justify-content: center;
+        justify-content: space-between;
         align-items: center;
       }
 
@@ -172,6 +171,7 @@
         position: absolute;
         width: 100%;
         height: 100%;
+        background-size: cover;
         background-position: center;
         background-repeat: no-repeat;
         background-color: var(--text-color);
@@ -185,23 +185,15 @@
         margin: 0;
         font-size: 3em;
         color: var(--text-color);
-        text-shadow: -1.5px -1.5px 0 black, 1.5px -1.5px 0 black,
-          -1.5px 1.5px 0 black, 1.5px 1.5px 0 black;
+        text-shadow: -1.5px -1.5px 0 black, 1.5px -1.5px 0 black, -1.5px 1.5px 0 black, 1.5px 1.5px 0 black;
       }
 
       #cardFront {
-        background-image: url(pics/viking8f.jpg);
-        background-size: 130%;
-        background-position: 43% 70%;
-        background-repeat: no-repeat;
+        background-image: url(pics/ornament5rev.jpg);
       }
 
       #cardBack {
-        background-image: url(pics/ornament4.jpg);
-        background-color: var(--text-color);
-        background-size: 100%;
-        background-position: center;
-        background-repeat: no-repeat;
+        background-image: url(pics/ornament5.jpg);
         transform: rotateY(180deg);
       }
 
@@ -237,8 +229,7 @@
         box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
         background-color: var(--secondary-color);
         text-shadow: none;
-        transition: transform 0.2s ease, box-shadow 0.2s ease,
-          background-color 0.2s ease;
+        transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
       }
 
       button:active {
@@ -248,6 +239,7 @@
 
       button:hover {
         background-color: var(--primary-color);
+        cursor: pointer;
       }
 
       #alternatives {
@@ -310,19 +302,14 @@
         margin: 0;
         font-size: 2em;
         color: var(--text-color);
-        background-image: url(pics/viking5f.jpg);
-        background-size: 130%;
-        background-position: 10% 30%;
+        background-image: url(pics/ornament4rev.jpg);
+        background-size: cover;
+        background-position: center;
         background-repeat: no-repeat;
       }
 
       #leaderboard {
         background-image: url(pics/ornament4.jpg);
-        color: var(--text-color);
-        background-size: 100%;
-        background-position: center;
-        background-repeat: no-repeat;
-        border: 10px solid var(--text-color);
         transform: rotateY(180deg);
       }
 
@@ -336,22 +323,22 @@
       }
 
       li {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
         list-style-position: inside;
         list-style-type: upper-roman;
         width: 100%;
         height: 100%;
         font-size: 0.6em;
-        display: flex;
-        flex-direction: column;
-        justify-content: flex-start;
       }
 
       .footer {
-        width: 100%;
-        height: 100%;
         display: flex;
         flex-direction: column;
         justify-content: flex-end;
+        width: 100%;
+        height: 100%;
         align-items: center;
         font-family: "Runesmall", sans-serif;
         font-size: 0.6em;
@@ -361,13 +348,7 @@
         display: flex;
         justify-content: center;
         align-items: center;
-        background: linear-gradient(
-          to right,
-          var(--secondary-color) 0%,
-          var(--primary-color) 10%,
-          var(--primary-color) 90%,
-          var(--secondary-color) 100%
-        );
+        background: linear-gradient(to right, var(--secondary-color) 0%, var(--primary-color) 10%, var(--primary-color) 90%, var(--secondary-color) 100%);
         font-family: "Runesmall", sans-serif;
       }
 
@@ -402,15 +383,13 @@
       h2 {
         margin: 10px 0 120px 0;
         font-size: 2.5em;
-        text-shadow: -0.6px -0.6px 0 black, 0.6px -0.6px 0 black,
-          -0.6px 0.6px 0 black, 0.6px 0.6px 0 black;
+        text-shadow: -0.6px -0.6px 0 black, 0.6px -0.6px 0 black, -0.6px 0.6px 0 black, 0.6px 0.6px 0 black;
       }
 
       h4 {
         margin: 10px 0 0 0;
         font-size: 1.2em;
-        /*text-shadow: -1.5px -1.5px 0 black, 1.5px -1.5px 0 black,
-          -1.5px 1.5px 0 black, 1.5px 1.5px 0 black;*/
+        text-shadow: -1.2px -1.2px 0 black, 1.2px -1.2px 0 black, -1.2px 1.2px 0 black, 1.2px 1.2px 0 black;
       }
 
       #loginWindow input,
@@ -433,21 +412,80 @@
         background: var(--secondary-color);
       }
 
+      /*MOBILE PHONE VIEW*/
+
       @media (max-width: 800px) {
         /*media 800*/
         html,
         body {
           height: 100%;
-          background-size: 20%;
+          background-size: 80%;
           overflow: auto;
-          background-size: auto 100vh;
+          overflow-x: hidden;
+        }
+
+        /*media 800*/
+        header {
+          background: var(--primary-color);
+        }
+
+        /*media 800*/
+        .burger {
+          display: block;
+          position: relative;
+          top: -4px;
+          right: 50px;
+          background: none;
+          border: none;
+          color: var(--text-color);
+        }
+
+        /*media 800*/
+        nav {
+          padding: 0 20px;
+          position: relative;
+        }
+
+        /*media 800*/
+        #menu {
+          display: none;
+          position: absolute;
+          top: 80px;
+          right: 0;
+          background: var(--secondary-color);
+          flex-direction: column;
+          padding: 10px 20px;
+          border-radius: 8px;
+          z-index: 100;
+          gap: 15px;
+          font-size: 3rem;
+          width: auto;
+        }
+
+        /*media 800*/
+        #menu.open {
+          display: flex;
         }
 
         /*media 800*/
         h1 {
-          font-size: 1.3em;
-          text-shadow: -1.5px -1.5px 0 black, 1.5px -1.5px 0 black,
-            -1.5px 1.5px 0 black, 1.5px 1.5px 0 black, 1px 1px 0 black;
+          display: flex;
+          flex-direction: column;
+          text-shadow: -1.5px -1.5px 0 black, 1.5px -1.5px 0 black, -1.5px 1.5px 0 black, 1.5px 1.5px 0 black, 1px 1px 0 black;
+        }
+
+        /*media 800*/
+        #norenga1,
+        #norenga2 {
+          display: inline-block;
+          position: relative;
+          top: 4px;
+          left: 50px;
+        }
+
+        /*media 800*/
+        #norenga2 {
+          top: -4px;
         }
 
         /*media 800*/
@@ -460,7 +498,7 @@
         .scoreboard-container {
           width: 280px;
           height: 400px;
-          margin-top: 20px;
+          margin-top: 40px;
         }
 
         /*media 800*/
@@ -468,8 +506,13 @@
         #cardBack,
         #personalScores,
         #leaderboard {
-          font-size: 2em;
           border-radius: 40px;
+        }
+
+        /*media 800*/
+        li,
+        .footer {
+          font-size: 0.5em;
         }
 
         /*media 800*/
@@ -481,15 +524,9 @@
           width: 80vw;
         }
 
+        /*media 800*/
         .input-container {
           margin: 10px;
-        }
-
-        /*media 800*/
-        .login-box {
-          width: 300px;
-          height: 300px;
-          border: solid 12px var(--secondary-color);
         }
 
         /*media 800*/
@@ -501,74 +538,25 @@
         }
 
         /*media 800*/
-        #score {
-          width: 60%;
-        }
-
-        /*media 800*/
-        h2 {
-          margin-top: 65px;
-        }
-
-        /*media 800*/
+        #score,
         input {
           width: 60%;
         }
 
         /*media 800*/
-        #nor {
-          width: 22px;
-          height: 16px;
+        h2 {
+          margin-top: 0;
         }
 
         /*media 800*/
-        #gbr {
-          width: 30px;
-          height: 15px;
-        }
-      }
-
-      @media (max-width: 400px) {
-        /*media 400*/
-        body {
-          background-size: 20%;
+        .pictures {
+          height: 30vh;
         }
 
-        /*media 400*/
-        h1 {
-          font-size: 1.6em;
-        }
-
-        /*media 400*/
-        #cardFront,
-        #cardBack,
-        #personalScores,
-        #leaderboard {
-          font-size: 1.5em;
-          border-radius: 40px;
-        }
-
-        /*media 400*/
-        .answer-submit,
-        #alternatives.show,
-        .score-add-logout {
-          display: flex;
-          justify-content: space-between;
-          width: 80vw;
-          margin-bottom: 15px;
-        }
-
-        /*media 400*/
-        button,
-        input,
-        #score {
-          padding: 3px 6px;
-          font-size: 1em;
-        }
-
-        /*media 400*/
-        #score {
-          width: 60%;
+        /*media 800*/
+        .login-box {
+          width: 300px;
+          height: 300px;
         }
       }
     </style>
@@ -587,24 +575,25 @@
 
     <header>
       <nav>
+        <h1>
+          <span id="norenga1">Nor</span>
+          <span id="norenga2">enga</span>
+        </h1>
         <ul id="menu">
-          <h1>
-            <span id="norenga1">Nor</span>
-            <span id="norenga2">enga</span>
-          </h1>
-          <li><a href="index.html">Home</a></li>
-          <li>
+          <li class="navli"><a href="index.html">Home</a></li>
+          <li class="navli">
             <a href="scores.html"><span>Your</span><span>scores</span></a>
           </li>
-          <li>
+          <li class="navli">
             <a href="topscores.html"><span>Top</span><span>scores</span></a>
           </li>
-          <li><a href="terms.html">Terms of Service</a></li>
-          <li><a href="contact.html">Contact</a></li>
-          <li>
+          <li class="navli"><a href="terms.html">Terms of Service</a></li>
+          <li class="navli"><a href="contact.html">Contact</a></li>
+          <li class="navli">
             <a id="logout"><span>Log</span><span>out</span></a>
           </li>
         </ul>
+        <button class="burger" id="burger">☰</button>
       </nav>
     </header>
 
